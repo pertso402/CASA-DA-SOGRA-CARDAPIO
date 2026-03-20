@@ -1353,7 +1353,7 @@ let editingId=null;
 // ══════════════════════════
 async function loadData(){
   try{
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD em fuso local
     const[prods,menu]=await Promise.all([
       sb('products','GET',null,'?order=category,name'),
       sb('menu_of_day','GET',null,`?date=eq.${today}`)
@@ -1724,7 +1724,7 @@ async function saveMenuOfDay(){
   btn.disabled = true; btn.textContent = 'Gravando...';
   
   try {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toLocaleDateString('en-CA');
     const existing = await sb('menu_of_day', 'GET', null, `?date=eq.${today}`);
     
     const payload = {
@@ -1880,7 +1880,7 @@ function switchTab(tab,el){
 // ADMIN — LOAD DATA
 // ══════════════════════════
 async function loadAdminData(){
-  document.getElementById('menuDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('menuDate').value = new Date().toLocaleDateString('en-CA');
   adminCarnes = [...options_carne];
   adminSides = [...options_acompanhamento];
   adminBuffet = [...options_buffet];
